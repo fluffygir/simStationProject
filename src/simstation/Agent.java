@@ -3,6 +3,7 @@ package simstation;
 import java.io.Serializable;
 
 public class Agent implements Runnable, Serializable {
+    public World world;
     int xc;
     int yc;
     boolean paused = false;
