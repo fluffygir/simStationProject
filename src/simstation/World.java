@@ -2,6 +2,7 @@ package simstation;
 
 import mvc.Model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -11,11 +12,13 @@ public class World extends Model {
     int clock;
     int alive;
     List<Agent> agentList;
+
     public World() {
         size =500;
         clock = 0;
         alive = 0;
         agentList = new java.util.ArrayList<>();
+
     }
 
     public void addAgent(Agent agent) {
