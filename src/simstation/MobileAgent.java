@@ -46,4 +46,5 @@ abstract public class MobileAgent extends Agent {
     public void turn(Heading heading){  //changes heading direction
         this.heading = heading;
     }
+
 }

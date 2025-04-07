@@ -25,12 +25,17 @@ public class World extends Model {
     public void addAgent(Agent agent) {
         agentList.add(agent);
         alive++;
-        agent.myThread.start();
         agent.world=this;
     }
     public void startAgents() {
         populate();
-        agentList.forEach(Agent::start);
+        for (Agent agent : agentList) {
+            // Create and start a new thread for each agent
+            Thread thread = new Thread(agent);
+            agent.myThread = thread;
+            thread.start();
+            agent.start(); // Sets stopped = false
+        }
     }
 
     public void stopAgents() {

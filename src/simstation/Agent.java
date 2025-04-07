@@ -64,7 +64,7 @@ abstract public class Agent implements Runnable, Serializable {
         }
     }
 
-    abstract public void update();
+    abstract public void update() throws InterruptedException;
 
     public void onStart(){ }
 
