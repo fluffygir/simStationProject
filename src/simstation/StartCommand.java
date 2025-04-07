@@ -10,7 +10,9 @@ public class StartCommand extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute()  {
+        World world = (World) model;
+        world.startAgents();
 
     }
 }
