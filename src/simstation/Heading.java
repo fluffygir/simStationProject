@@ -1,4 +1,5 @@
-package SimStation2;
+package simstation;
+
 
 import mvc.Utilities;
 
