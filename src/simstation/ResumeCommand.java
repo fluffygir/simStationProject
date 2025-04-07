@@ -11,6 +11,8 @@ public class ResumeCommand extends Command {
 
     @Override
     public void execute() throws Exception {
+    	World world = (World) model;
+    	world.resumeAgents();
 
     }
 }

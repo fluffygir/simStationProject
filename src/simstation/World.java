@@ -3,11 +3,12 @@ package simstation;
 import mvc.Model;
 
 import java.util.Iterator;
-
+import java.util.*;
 public class World extends Model {
     int size = 500;
     int clock = 0;
     int alive = 0;
+    protected List<Agent> agents = new ArrayList<>();
 
     public World() {
 
@@ -24,6 +25,9 @@ public class World extends Model {
     public void pauseAgents() {
     }
     public void resumeAgents() {
+    	for(Agent agent: agents) {
+    		agent.resume();
+    	}
     }
     public void updateStatistics() {
     }

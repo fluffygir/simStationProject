@@ -2,6 +2,7 @@ package simstation;
 
 import mvc.Command;
 import mvc.Model;
+import javax.swing.*;
 
 public class StatsCommand extends Command {
 
@@ -10,7 +11,9 @@ public class StatsCommand extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
-
+    public void execute() {
+    	World world = (World) model;
+    	String stats = world.toString();
+    	JOptionPane.showMessageDialog(null, stats, "Simulation Stats", JOptionPane.INFORMATION_MESSAGE);
     }
 }
