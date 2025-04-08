@@ -1,5 +1,6 @@
 package simstation;
 
+
 import mvc.Model;
 
 import java.util.ArrayList;
@@ -24,12 +25,17 @@ public class World extends Model {
     public void addAgent(Agent agent) {
         agentList.add(agent);
         alive++;
-        agent.myThread.start();
         agent.world=this;
     }
     public void startAgents() {
         populate();
-        agentList.forEach(Agent::start);
+        for (Agent agent : agentList) {
+            // Create and start a new thread for each agent
+            Thread thread = new Thread(agent);
+            agent.myThread = thread;
+            thread.start();
+            agent.start(); // Sets stopped = false
+        }
     }
 
     public void stopAgents() {
@@ -41,18 +47,18 @@ public class World extends Model {
     public void resumeAgents() {
         agentList.forEach(Agent::resume);
     }
+
     public void updateStatistics() {
         clock++;
-        alive=0;
-        // Iterate through all agents in the world to count active ones
+        alive = 0;
+
         for (Agent agent : agentList) {
-            if (!agent.paused&&!agent.stopped) { // Check if the agent is currently active
+            if (!agent.isStopped()) { // Check if the agent is currently active
                 alive++;
             }
         }
-
-
     }
+
     public void populate(){
 
     }
@@ -86,6 +92,13 @@ public class World extends Model {
         } while (currentIndex != startIndex); // Repeat until we loop back to the start
 
         return null; // Return null if no suitable neighbor is found
+    }
+    public String toString() {
+        return
+                "#agents = " + agentList.size() + "\n" +
+                        "clock = " + clock + "\n" +
+                        "Active agents: " + alive + "\n" +
+                        getStatus();
     }
 
     public Iterator<Agent> iterator() {
