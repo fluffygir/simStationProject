@@ -7,7 +7,7 @@ import simstation.*;
 class Drunk extends MobileAgent {
 
     public Drunk() {
-        super();
+        super("Drunk");
     }
 
     public void update() throws InterruptedException {

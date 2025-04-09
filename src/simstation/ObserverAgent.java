@@ -2,8 +2,8 @@ package simstation;
 
 public class ObserverAgent extends Agent {
 
-    public ObserverAgent() {
-        super();
+    public ObserverAgent(String name) {
+        super(name);
     }
 
     @Override

@@ -3,30 +3,36 @@ package simstation;
 
 import mvc.Model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Observer;
 import java.util.Random;
 
+
 public class World extends Model {
-    int size;
+    static int SIZE;
     int clock;
     int alive;
     List<Agent> agentList;
+    ObserverAgent observer;
 
     public World() {
-        size =500;
+        SIZE =500;
         clock = 0;
         alive = 0;
         agentList = new java.util.ArrayList<>();
-
+        observer = new ObserverAgent("Observer");
+        observer.world = this;
     }
 
     public void addAgent(Agent agent) {
         agentList.add(agent);
         alive++;
         agent.world=this;
+        observer.update();
     }
+
+
     public void startAgents() {
         populate();
         for (Agent agent : agentList) {
@@ -36,37 +42,47 @@ public class World extends Model {
             thread.start();
             agent.start(); // Sets stopped = false
         }
+        observer.update();
+
     }
 
     public void stopAgents() {
         agentList.forEach(Agent::stop);
+        observer.update();
+
     }
     public void pauseAgents() {
         agentList.forEach(Agent::pause);
+        observer.update();
+
     }
     public void resumeAgents() {
         agentList.forEach(Agent::resume);
-    }
+        observer.update();
 
+    }
     public void updateStatistics() {
         clock++;
-        alive = 0;
-
+        alive=0;
+        // Iterate through all agents in the world to count active ones
         for (Agent agent : agentList) {
-            if (!agent.isStopped()) { // Check if the agent is currently active
+            if (!agent.paused||!agent.stopped) { // Check if the agent is currently active
                 alive++;
             }
         }
-    }
 
+
+
+    }
     public void populate(){
 
     }
     public String getStatus (){
         if (alive == 0) return "No agents alive";
         else {
-            return alive + " agents alive";
+            return alive + " agents alive\n" + clock + " clock ticks";
         }
+
     }
     public Agent getNeighbor(Agent caller, int radius) {
         if (agentList.isEmpty()) return null; // Safeguard for empty list
@@ -92,13 +108,6 @@ public class World extends Model {
         } while (currentIndex != startIndex); // Repeat until we loop back to the start
 
         return null; // Return null if no suitable neighbor is found
-    }
-    public String toString() {
-        return
-                "#agents = " + agentList.size() + "\n" +
-                        "clock = " + clock + "\n" +
-                        "Active agents: " + alive + "\n" +
-                        getStatus();
     }
 
     public Iterator<Agent> iterator() {
