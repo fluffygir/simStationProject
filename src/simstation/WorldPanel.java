@@ -59,7 +59,6 @@ public class WorldPanel extends AppPanel {
         controlPanel.add(p,  BorderLayout.NORTH);
     }
 
-
     public void setModel(Model m) {
         super.setModel(m);
         World w = (World)m;

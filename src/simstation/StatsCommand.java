@@ -13,7 +13,7 @@ public class StatsCommand extends Command {
     @Override
     public void execute() {
         World world = (World) model;
-        String stats = world.toString();
+        String stats = world.getStatus();
         JOptionPane.showMessageDialog(null, stats, "Simulation Stats", JOptionPane.INFORMATION_MESSAGE);
     }
 }
