@@ -3,23 +3,24 @@ package simstation;
 
 import mvc.Model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Observer;
 import java.util.Random;
 
 public class World extends Model {
-    int size;
+    static int SIZE;
     int clock;
     int alive;
     List<Agent> agentList;
+    ObserverAgent observer;
 
     public World() {
-        size =500;
+        SIZE =500;
         clock = 0;
         alive = 0;
         agentList = new java.util.ArrayList<>();
-
+        observer = new ObserverAgent("Observer");
     }
 
     public void addAgent(Agent agent) {
@@ -52,7 +53,7 @@ public class World extends Model {
         alive=0;
         // Iterate through all agents in the world to count active ones
         for (Agent agent : agentList) {
-            if (!agent.paused&&!agent.stopped) { // Check if the agent is currently active
+            if (!agent.paused||!agent.stopped) { // Check if the agent is currently active
                 alive++;
             }
         }
