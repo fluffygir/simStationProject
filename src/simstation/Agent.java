@@ -1,23 +1,34 @@
 package simstation;
 
+import mvc.Utilities;
+
 import java.io.Serializable;
 
 abstract public class Agent implements Runnable, Serializable {
-    int xc;
-    int yc;
+    public int xc;
+    public int yc;
     boolean paused, stopped;
     String agentName;
     transient protected Thread myThread;
-    World world;
+    public World world;
 
-    public Agent(){
+    public Agent(String name){
         this.myThread = null;
-        this.agentName = null;
+        this.agentName = name;
         this.world = null;
         this.paused = false;
         this.stopped = false;
-        this.xc = 0;
-        this.yc = 0;
+        this.xc = Utilities.rng.nextInt(World.SIZE);
+        this.yc = Utilities.rng.nextInt(World.SIZE);
+    }
+
+    public String getName() { return agentName; }
+    public synchronized String toString() {
+        String result = agentName;
+        if (stopped) result += " (stopped)";
+        else if (paused) result += " (paused)";
+        else result += " (running)";
+        return result;
     }
 
     // thread stuff
@@ -35,8 +46,8 @@ abstract public class Agent implements Runnable, Serializable {
         }
     }
 
-    //wait for notification if I'm not stopped and I'm suspended
-    private synchronized void checkSuspended() {
+    //wait for notification if I'm not stopped and I'm paused
+    private synchronized void checkPaused() {
         try {
             while(!stopped && paused) {
                 wait();
@@ -50,25 +61,26 @@ abstract public class Agent implements Runnable, Serializable {
     @Override
     public void run() {
         myThread = Thread.currentThread();
+        onStart();
+        checkPaused();
         while (!stopped) {
             try {
-                onStart();                  //unsure about placement of on___ methods
                 update();
                 onInterrupted();
                 Thread.sleep(1000);
-                checkSuspended();
-                onExit();
+                checkPaused();
             } catch(InterruptedException e) {
                 System.out.println(e.getMessage());
             }
         }
+        onExit();
     }
 
     abstract public void update() throws InterruptedException;
 
-    public void onStart(){ }
+    protected synchronized void onStart(){ }
 
-    public void onInterrupted(){ }
+    protected synchronized void onInterrupted(){ }
 
-    public void onExit(){ }
+    protected synchronized void onExit(){ }
 }

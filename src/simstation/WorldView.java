@@ -34,7 +34,7 @@ public class WorldView extends View {
     public void drawAgents(Agent a, Graphics gc){
         gc.setColor(Color.RED); // Set color to red
         int size = 10; // Agent size (diameter of the circle)
-        gc.fillOval(a.xc - size / 2, a.yc - size / 2, size, size); // Fixed to use a.yc for y-coordinate
+        gc.fillOval(a.xc- size / 2, a.yc - size / 2, size, size); // Draw centered circle
 
 
 
