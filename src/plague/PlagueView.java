@@ -23,7 +23,6 @@ public class PlagueView extends WorldView {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        // Access PlagueSimulation
         PlagueSimulation simulation = (PlagueSimulation) getModel();
 
         // Iterate through all agents in the simulation
@@ -38,7 +37,7 @@ public class PlagueView extends WorldView {
             int x = (int) ((agent.xc / (double) World.SIZE) * getWidth());
             int y = (int) ((agent.yc / (double) World.SIZE) * getHeight());
 
-            // Draw the agent as a small circle (e.g., diameter = 10 pixels)
+            // Draw the agent as a small circle
             g.fillOval(x, y, 10, 10);
         }
     }

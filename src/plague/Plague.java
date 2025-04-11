@@ -9,7 +9,7 @@ public class Plague extends MobileAgent {
 
     public Plague() {
         super("Plague");
-        infected = false;  // initial infection set in populate()
+        infected = false;
     }
 
     public void setInfected(boolean status) {
@@ -21,7 +21,7 @@ public class Plague extends MobileAgent {
     }
 
     public void infect() {
-        // Resistance gives a chance to avoid infection
+
         if (Math.random() * 100 >= PlagueSimulation.RESISTANCE) {
             infected = true;
         }
@@ -30,7 +30,7 @@ public class Plague extends MobileAgent {
     @Override
     public void update() throws InterruptedException {
 
-        move(5);  // inherited from MobileAgent
+        move(5);
 
         // if infected, attempt to infect a nearby agent
         if (infected) {
