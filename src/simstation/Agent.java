@@ -10,7 +10,7 @@ abstract public class Agent implements Runnable, Serializable {
     boolean paused, stopped;
     String agentName;
     transient protected Thread myThread;
-    World world;
+    public World world;
 
     public Agent(String name){
         this.myThread = null;
