@@ -10,7 +10,7 @@ import java.util.Random;
 
 
 public class World extends Model {
-    static int SIZE;
+    public static int SIZE;
     int clock;
     int alive;
     List<Agent> agentList;

@@ -1,7 +1,7 @@
-// Plague.java
 package plague;
 
 import simstation.Agent;
+import simstation.Heading;
 import simstation.MobileAgent;
 
 public class Plague extends MobileAgent {
@@ -29,6 +29,7 @@ public class Plague extends MobileAgent {
 
     @Override
     public void update() throws InterruptedException {
+
         move(5);  // inherited from MobileAgent
 
         // if infected, attempt to infect a nearby agent
