@@ -9,16 +9,14 @@ public class PlaguePanel extends WorldPanel {
     public PlaguePanel(PlagueFactory factory) {
         super(factory);
 
-        // Make the controlPanel pink like your screenshot
+
         controlPanel.setBackground(Color.PINK);
 
-        // --- Buttons are already added into controlPanel.NORTH by super(factory) ---
 
-        // Build a single vertical box for all sliders + the toggle button
         Box centerBox = Box.createVerticalBox();
-        centerBox.setOpaque(false);    // let controlPanel's pink show through
+        centerBox.setOpaque(false);
 
-        // 1) Initial % Infected
+        // Initial % Infected
         JLabel initLabel = new JLabel("Initial % Infected: " + PlagueSimulation.INITIAL_INFECTED + "%");
         initLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         JSlider initSlider = new JSlider(0, 100, PlagueSimulation.INITIAL_INFECTED);
@@ -32,7 +30,7 @@ public class PlaguePanel extends WorldPanel {
         });
         initSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // 2) Infection Probability (Virulence)
+        // Infection Probability (Virulence)
         JLabel virLabel = new JLabel("Infection Probability: " + PlagueSimulation.VIRULENCE + "%");
         virLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         JSlider virSlider = new JSlider(0, 100, PlagueSimulation.VIRULENCE);
@@ -46,7 +44,7 @@ public class PlaguePanel extends WorldPanel {
         });
         virSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // 3) Initial Population Size
+        //Initial Population Size
         JLabel popLabel = new JLabel("Initial Population Size: " + PlagueSimulation.POP_SIZE);
         popLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         JSlider popSlider = new JSlider(0, 200, PlagueSimulation.POP_SIZE);
@@ -60,7 +58,7 @@ public class PlaguePanel extends WorldPanel {
         });
         popSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // 4) Fatality/Recovery Time
+        // Fatality/Recovery Time
         JLabel recLabel = new JLabel("Fatality/Recovery Time: " + PlagueSimulation.RECOVERY_TIME);
         recLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         JSlider recSlider = new JSlider(0, 500, PlagueSimulation.RECOVERY_TIME);
@@ -74,7 +72,7 @@ public class PlaguePanel extends WorldPanel {
         });
         recSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // 5) Not Fatal toggle button
+        //Not Fatal toggle button
         JButton fatalToggle = new JButton(PlagueSimulation.IS_FATAL ? "Fatal" : "Not Fatal");
         fatalToggle.setAlignmentX(Component.CENTER_ALIGNMENT);
         fatalToggle.addActionListener(e -> {
@@ -82,7 +80,7 @@ public class PlaguePanel extends WorldPanel {
             fatalToggle.setText(PlagueSimulation.IS_FATAL ? "Fatal" : "Not Fatal");
         });
 
-        // Add them with spacing to centerBox
+
         centerBox.add(Box.createVerticalStrut(10));
         centerBox.add(initLabel);
         centerBox.add(initSlider);
@@ -99,7 +97,6 @@ public class PlaguePanel extends WorldPanel {
         centerBox.add(fatalToggle);
         centerBox.add(Box.createVerticalGlue());
 
-        // Place the box into the CENTER of controlPanel (below the button row)
         controlPanel.add(centerBox, BorderLayout.CENTER);
     }
 }
