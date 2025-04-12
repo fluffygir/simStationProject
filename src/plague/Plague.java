@@ -24,6 +24,7 @@ public class Plague extends MobileAgent {
 
         if (Math.random() * 100 >= PlagueSimulation.RESISTANCE) {
             infected = true;
+            world.changed();
         }
     }
 
