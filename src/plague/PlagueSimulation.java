@@ -4,7 +4,6 @@ import mvc.AppPanel;
 import simstation.Agent;
 import simstation.World;
 
-import javax.swing.*;
 import java.util.Iterator;
 
 public class PlagueSimulation extends World {
