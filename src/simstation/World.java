@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class World extends Model {
     public static int SIZE;
-    int clock;
-    int alive;
+    public int clock;
+    public int alive;
     List<Agent> agentList;
     ObserverAgent observer;
 
