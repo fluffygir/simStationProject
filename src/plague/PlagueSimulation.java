@@ -19,7 +19,6 @@ public class PlagueSimulation extends World {
         super();
         SIZE = 500; // Set world size
     }
-
     public void setFatal(boolean fatal) {
         this.fatal = fatal;
     }
