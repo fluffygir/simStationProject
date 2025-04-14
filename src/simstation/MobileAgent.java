@@ -5,7 +5,7 @@ abstract public class MobileAgent extends Agent {
 
     public MobileAgent(String name) {
         super(name);
-        heading = Heading.EAST;
+        turn(Heading.random()); // Start with random heading
     }
 
     @Override
@@ -15,36 +15,39 @@ abstract public class MobileAgent extends Agent {
         if(heading == Heading.EAST) {
             for (int i = 0; i < steps; i++) {
                 xc += 1;
-                if (xc > world.SIZE) xc -= world.SIZE;
+                if (xc > World.SIZE) xc -= World.SIZE;
                 world.changed();
                 Thread.sleep(20);
             }
         } else if(heading == Heading.WEST){
             for(int i = 0; i < steps; i++){
                 xc -= 1;
-                if (xc < 0) xc += world.SIZE;
+                if (xc < 0) xc += World.SIZE;
                 world.changed();
                 Thread.sleep(20);
             }
         } else if(heading == Heading.NORTH){
             for(int i = 0; i < steps; i++){
                 yc -= 1;
-                if (yc < 0) yc += world.SIZE;
+                if (yc < 0) yc += World.SIZE;
                 world.changed();
                 Thread.sleep(20);
             }
         } else if(heading == Heading.SOUTH){
             for(int i = 0; i < steps; i++){
                 yc += 1;
-                if (yc > world.SIZE) yc -= world.SIZE;
+                if (yc > World.SIZE) yc -= World.SIZE;
                 world.changed();
                 Thread.sleep(20);
             }
         }
     }
 
-    public void turn(Heading heading){  //changes heading direction
+    public void  turn(Heading heading){  //changes heading direction
         this.heading = heading;
     }
 
+    public Heading getHeading() {
+        return heading;
+    }
 }

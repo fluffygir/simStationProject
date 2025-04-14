@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class PlaguePanel extends WorldPanel {
 
-    private JToggleButton fatalToggle;
+    private final JToggleButton fatalToggle;
 
     public PlaguePanel(PlagueFactory factory) {
         super(factory);
@@ -64,14 +64,13 @@ public class PlaguePanel extends WorldPanel {
             recLabel.setText("Fatality/Recovery Time: " + PlagueSimulation.RECOVERY_TIME);
         });
 
-        // Fatal toggle button
+
         fatalToggle = new JToggleButton("Not Fatal");
         fatalToggle.setSelected(false); // Default is fatal
         fatalToggle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Logic for toggling fatality in the simulation
-                // Will be applied to newly created agents when simulation starts
+
                 if (model instanceof PlagueSimulation) {
                     ((PlagueSimulation) model).setFatal(!fatalToggle.isSelected());
                 }

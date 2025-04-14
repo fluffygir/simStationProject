@@ -4,15 +4,22 @@ import simstation.Agent;
 import simstation.MobileAgent;
 import simstation.Heading;
 
+
+
 public class Plague extends MobileAgent {
     private boolean infected;
+    private boolean dead; // "Dead" state specific to Plague agents
     private int infectionTime = 0;
     private boolean fatal = true;
 
     public Plague() {
         super("Plague");
         infected = false;
-        turn(Heading.random()); // Start with random heading
+        dead = false; // Default: agent is alive
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 
     public void setInfected(boolean status) {
@@ -33,7 +40,6 @@ public class Plague extends MobileAgent {
     public boolean isFatal() {
         return fatal;
     }
-
     public void infect() {
         // Check if infection happens based on virulence
         if (Math.random() * 100 < PlagueSimulation.VIRULENCE) {
@@ -47,40 +53,39 @@ public class Plague extends MobileAgent {
 
     @Override
     public void update() throws InterruptedException {
-        // Randomly change direction occasionally
+        if (dead || isStopped()) {
+            return;
+        }
+
+        // Infection and movement logic
         if (Math.random() < 0.1) {
             turn(Heading.random());
         }
-
-        // Move agent
         move(5);
 
-        // Handle infection logic
         if (infected) {
-            // Increment infection time
             infectionTime++;
-
-            // Check if recovery/death time has been reached
             if (infectionTime >= PlagueSimulation.RECOVERY_TIME) {
                 if (fatal) {
-                    // Agent dies (could implement removal logic here)
-                    stop();
+                    die(); // Causes the agent to "die" (custom method in subclass)
                 } else {
                     // Agent recovers
                     infected = false;
                 }
             }
 
-            // Try to infect neighbors
+            // Attempt to infect neighbors
             Agent neighbor = world.getNeighbor(this, 10);
-            if (neighbor != null && neighbor instanceof Plague) {
-                Plague other = (Plague) neighbor;
+            if (neighbor != null && neighbor instanceof Plague other) {
                 if (!other.isInfected()) {
                     other.infect();
                 }
             }
         }
+    }
 
-        Thread.sleep(20);
+    private void die() {
+        dead = true;       // Mark this agent as explicitly dead
+        stop();            // Use the inherited stop method to stop thread
     }
 }
