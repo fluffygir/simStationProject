@@ -13,7 +13,6 @@ public class PlaguePanel extends WorldPanel {
     public PlaguePanel(PlagueFactory factory) {
         super(factory);
 
-        // Create a vertical box to hold our sliders
         Box sliderBox = Box.createVerticalBox();
 
         // Initial % Infected
@@ -77,7 +76,7 @@ public class PlaguePanel extends WorldPanel {
             }
         });
 
-        // Add components to the slider box
+
         sliderBox.add(Box.createVerticalStrut(10));
         sliderBox.add(initLabel);
         sliderBox.add(initSlider);
@@ -92,13 +91,13 @@ public class PlaguePanel extends WorldPanel {
         sliderBox.add(recSlider);
         sliderBox.add(Box.createVerticalStrut(10));
 
-        // Add fatal toggle button at the bottom
+
         JPanel togglePanel = new JPanel();
         togglePanel.add(fatalToggle);
         sliderBox.add(togglePanel);
         sliderBox.add(Box.createVerticalStrut(10));
 
-        // Place sliders under the existing buttons
+
         controlPanel.setLayout(new BorderLayout());
         controlPanel.add(threadPanel, BorderLayout.NORTH);
         controlPanel.add(sliderBox, BorderLayout.CENTER);

@@ -8,14 +8,14 @@ import simstation.Heading;
 
 public class Plague extends MobileAgent {
     private boolean infected;
-    private boolean dead; // "Dead" state specific to Plague agents
+    private boolean dead;
     private int infectionTime = 0;
     private boolean fatal = true;
 
     public Plague() {
         super("Plague");
         infected = false;
-        dead = false; // Default: agent is alive
+        dead = false;
     }
 
     public boolean isDead() {
@@ -66,8 +66,8 @@ public class Plague extends MobileAgent {
         if (infected) {
             infectionTime++;
             if (infectionTime >= PlagueSimulation.RECOVERY_TIME) {
-                if (fatal) {
-                    die(); // Causes the agent to "die" (custom method in subclass)
+                if (isFatal()) {
+                    die(); // Causes the agent to "die"
                 } else {
                     // Agent recovers
                     infected = false;
@@ -86,6 +86,6 @@ public class Plague extends MobileAgent {
 
     private void die() {
         dead = true;       // Mark this agent as explicitly dead
-        stop();            // Use the inherited stop method to stop thread
+        stop();
     }
 }
