@@ -5,7 +5,7 @@ abstract public class MobileAgent extends Agent {
 
     public MobileAgent(String name) {
         super(name);
-        heading = Heading.EAST;
+        turn(Heading.random()); // Start with random heading
     }
 
     @Override
@@ -43,8 +43,11 @@ abstract public class MobileAgent extends Agent {
         }
     }
 
-    public void turn(Heading heading){  //changes heading direction
+    public void  turn(Heading heading){  //changes heading direction
         this.heading = heading;
     }
 
+    public Heading getHeading() {
+        return heading;
+    }
 }

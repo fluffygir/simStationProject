@@ -12,7 +12,6 @@ public class Plague extends MobileAgent {
     public Plague() {
         super("Plague");
         infected = false;
-        turn(Heading.random()); // Start with random heading
     }
 
     public void setInfected(boolean status) {
@@ -81,6 +80,6 @@ public class Plague extends MobileAgent {
             }
         }
 
-        Thread.sleep(20);
+        //Thread.sleep(20);
     }
 }
