@@ -1,14 +1,17 @@
 package prisoners;
 
 import simstation.*;
+import java.util.Iterator;
 
 public class Prisoner extends MobileAgent {
     private int fitness = 0;
     private Strategy strategy;
+    private World myWorld; // store a reference to the world manually
 
-    public Prisoner(String name, Strategy strategy) {
-        super(name); 
+    public Prisoner(World world, Strategy strategy) {
+        super(); // must call default constructor
         this.strategy = strategy;
+        this.myWorld = world;
     }
 
     public boolean cooperate() {
@@ -16,7 +19,7 @@ public class Prisoner extends MobileAgent {
     }
 
     public void update() {
-        Prisoner partner = (Prisoner)((World) world).getNeighbors(this, 10); 
+        Prisoner partner = findRandomNeighbor(10); // radius 10
         if (partner != null) {
             boolean myMove = this.cooperate();
             boolean partnerMove = partner.cooperate();
@@ -38,6 +41,22 @@ public class Prisoner extends MobileAgent {
             strategy.setCheated(!partnerMove);
             partner.strategy.setCheated(!myMove);
         }
+    }
+
+    private Prisoner findRandomNeighbor(int radius) {
+        Iterator<Agent> it = myWorld.iterator();
+        while (it.hasNext()) {
+            Agent a = it.next();
+            if (a != this && a instanceof Prisoner) {
+                double dx = this.xc - a.xc;
+                double dy = this.yc - a.yc;
+                double distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance <= radius) {
+                    return (Prisoner) a;
+                }
+            }
+        }
+        return null;
     }
 
     public int getFitness() {
