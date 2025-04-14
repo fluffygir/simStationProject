@@ -47,6 +47,6 @@ public class WorldFactory implements AppFactory {
 
     @Override
     public String about() {
-        return "SimStation version 1.0. Copyright 2025 by Naina Talasu, Ryan Nikopour, & Nathaniel Fadrigon";
+        return "SimStation Copyright 2025 by Naina Talasu, Ryan Nikopour, & Nathaniel Fadrigon";
     }
 }
