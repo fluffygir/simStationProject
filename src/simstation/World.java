@@ -15,6 +15,7 @@ public class World extends Model {
     public int alive;
     List<Agent> agentList;
     ObserverAgent observer;
+    public boolean populateFlag=false;
 
     public World() {
         SIZE =500;
@@ -33,7 +34,11 @@ public class World extends Model {
 
 
     public void startAgents() {
-        populate();
+        if(!populateFlag){
+            populate();
+            populateFlag=true;
+        }
+
         for (Agent agent : agentList) {
             // Create and start a new thread for each agent
             Thread thread = new Thread(agent);
