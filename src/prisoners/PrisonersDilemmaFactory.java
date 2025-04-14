@@ -2,6 +2,7 @@ package prisoners;
 
 import simstation.*;
 import mvc.Model;
+import mvc.View;
 
 public class PrisonersDilemmaFactory extends WorldFactory {
 	
@@ -16,4 +17,9 @@ public class PrisonersDilemmaFactory extends WorldFactory {
     public String getTitle() {
         return "Prisoner's Dilemma";
     }
+    
+    public View makeView(Model m) {
+        return new PrisonersDilemmaView(m);
+    }
+
 }

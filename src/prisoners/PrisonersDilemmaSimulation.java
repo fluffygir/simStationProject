@@ -6,10 +6,11 @@ import java.util.*;
 public class PrisonersDilemmaSimulation extends World {
     public void populate() {
         for (int i = 0; i < 10; i++) {
-            addAgent(new Prisoner("Coop" + i, new Cooperate()));
-            addAgent(new Prisoner("Cheat" + i, new Cheat()));
-            addAgent(new Prisoner("Rand" + i, new RandomlyCooperate()));
-            addAgent(new Prisoner("Tit" + i, new Tit4Tat()));
+        	addAgent(new Prisoner(new Cooperate()));
+        	addAgent(new Prisoner(new Cheat()));
+        	addAgent(new Prisoner(new RandomlyCooperate()));
+        	addAgent(new Prisoner(new Tit4Tat()));
+
         }
     }
 
