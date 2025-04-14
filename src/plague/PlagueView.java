@@ -23,10 +23,11 @@ public class PlagueView extends WorldView {
 
         while (iter.hasNext()) {
             Agent agent = iter.next();
-            if (agent instanceof Plague) {
-                Plague plagueAgent = (Plague) agent;
+            if (agent instanceof Plague plagueAgent) {
                 // Set color based on infection status
-                if (plagueAgent.isInfected()) {
+                if(plagueAgent.isDead()){
+                    gc.setColor(Color.DARK_GRAY);
+                } else if (plagueAgent.isInfected()) {
                     gc.setColor(Color.RED);
                 } else {
                     gc.setColor(Color.GREEN);

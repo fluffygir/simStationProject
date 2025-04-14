@@ -29,7 +29,6 @@ public class World extends Model {
         agentList.add(agent);
         alive++;
         agent.world=this;
-        observer.update();
     }
 
 
@@ -42,23 +41,24 @@ public class World extends Model {
             thread.start();
             agent.start(); // Sets stopped = false
         }
-        observer.update();
-
+        observer.myThread = new Thread(observer);
+        observer.myThread.start();
+        observer.start();
     }
 
     public void stopAgents() {
         agentList.forEach(Agent::stop);
-        observer.update();
+        observer.stop();
 
     }
     public void pauseAgents() {
         agentList.forEach(Agent::pause);
-        observer.update();
+        observer.pause();
 
     }
     public void resumeAgents() {
         agentList.forEach(Agent::resume);
-        observer.update();
+        observer.resume();
 
     }
     public void updateStatistics() {
@@ -66,7 +66,7 @@ public class World extends Model {
         alive=0;
         // Iterate through all agents in the world to count active ones
         for (Agent agent : agentList) {
-            if (!agent.paused||!agent.stopped) { // Check if the agent is currently active
+            if (!agent.paused&&!agent.stopped) { // Check if the agent is currently active
                 alive++;
             }
         }
@@ -78,10 +78,10 @@ public class World extends Model {
 
     }
     public String getStatus (){
-        if (alive == 0) return "No agents alive";
-        else {
-            return alive + " agents alive\n" + clock + " clock ticks";
-        }
+        //if (alive == 0) return "No agents alive";
+        //else {
+        return alive + " agents alive\n" + clock + " clock ticks";
+        //}
 
     }
     public Agent getNeighbor(Agent caller, int radius) {

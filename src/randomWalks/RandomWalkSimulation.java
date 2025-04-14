@@ -1,17 +1,16 @@
-package randomWalks;
 
 
 import mvc.*;
 import simstation.*;
 
-class Drunk extends MobileAgent {
+class Drunk extends simstation.MobileAgent {
 
     public Drunk() {
         super("Drunk");
     }
 
     public void update() throws InterruptedException {
-        Heading heading = Heading.random();
+        turn(Heading.random());
         int steps = Utilities.rng.nextInt(20) + 1;
         move(steps);
     }
