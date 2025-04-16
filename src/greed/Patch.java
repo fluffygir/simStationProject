@@ -3,39 +3,35 @@ package greed;
 public class Patch {
     public static final int MAX_ENERGY = 100;
     private int energy;
-    static int growBackRate;
-    private int patchSize;
+    static int growBackRate = 1;
+    public static int patchSize = 10;
 
     public Patch(int growBackRate, int patchSize) {
         this.energy = MAX_ENERGY;
-        this.growBackRate = growBackRate;
-        this.patchSize = patchSize;
+        Patch.growBackRate = growBackRate;
+        Patch.patchSize = patchSize;
     }
 
-    public int getEnergy() {
+    public synchronized int getEnergy() {
         return energy;
     }
 
-    public void reduceEnergy(int amount) {
-        energy = Math.max(0, energy - amount);
-    }
+    public synchronized int eatMe(Cow cow, int greediness) throws InterruptedException {
+        while (energy < greediness) {
+            wait(); // Wait until notified
 
+            if (Thread.currentThread().isInterrupted()) {
+                return 0;
+            }
+        }
 
-    public void growBack() {
-        energy = Math.min(MAX_ENERGY, energy + growBackRate);
-    }
-
-    public int eatMe(Cow cow, int amount) {
-        int eaten = Math.min(amount, energy);
+        int eaten = Math.min(greediness, energy);
         energy -= eaten;
         return eaten;
     }
 
-    public int getPatchSize() {
-        return patchSize;
-    }
-
-    public void update(){
-        growBack();
+    public synchronized void update() {
+        energy = Math.min(MAX_ENERGY, energy + growBackRate);
+        notifyAll();
     }
 }

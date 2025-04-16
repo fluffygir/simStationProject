@@ -4,15 +4,17 @@ import mvc.AppPanel;
 import simstation.*;
 import java.util.*;
 
+import static greed.Patch.patchSize;
+
 public class Meadow extends World {
     public static int waitPenalty = 5;
     public static int moveEnergy = 10;
     public static int numCows = 50;
     public static int dim = 50;
-    public static int patchSize = 10;
-    public static int greediness;
+
+
     public static int growBackRate;
-    private static int userGreediness = 25;
+
     private Patch[][] patches;
     private List<Cow> cows = new ArrayList<>();
 
@@ -65,13 +67,6 @@ public class Meadow extends World {
         return growBackRate;
     }
 
-    public static int getUserGreediness() {
-        return userGreediness;
-    }
-
-    public static void setUserGreediness(int value) {
-        userGreediness = value;
-    }
     public static void main(String[] args) {
         AppPanel panel = new GreedPanel(new GreedFactory());
         panel.display();

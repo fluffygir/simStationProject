@@ -13,7 +13,7 @@ public class GreedView extends WorldView {
     public void paintComponent(Graphics gc) {
         super.paintComponent(gc);
         Meadow meadow = (Meadow) model;
-        int patchSize = Meadow.patchSize;
+        int patchSize = Patch.patchSize;
 
         // Draw patches
         for (int i = 0; i < Meadow.dim; i++) {

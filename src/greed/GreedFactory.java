@@ -1,5 +1,6 @@
 package greed;
 
+import greed.GreedView;
 import simstation.*;
 import mvc.*;
 
@@ -11,6 +12,7 @@ public class GreedFactory extends WorldFactory {
     public View makeView(Model model) {
         return new GreedView(model);
     }
+
 
     public String getTitle() {
         return "Greed Simulation";
