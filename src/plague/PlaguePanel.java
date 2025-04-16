@@ -69,12 +69,21 @@ public class PlaguePanel extends WorldPanel {
         fatalToggle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean isFatal = !fatalToggle.isSelected(); // Selected means "Not Fatal"
 
                 if (model instanceof PlagueSimulation) {
-                    ((PlagueSimulation) model).setFatal(!fatalToggle.isSelected());
+                    ((PlagueSimulation) model).setFatal(isFatal);
+                }
+
+                // Update button label based on the current state
+                if (isFatal) {
+                    fatalToggle.setText("Fatal");
+                } else {
+                    fatalToggle.setText("Not Fatal");
                 }
             }
         });
+
 
 
         sliderBox.add(Box.createVerticalStrut(10));

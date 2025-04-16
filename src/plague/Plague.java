@@ -1,9 +1,9 @@
 package plague;
 
+
 import simstation.Agent;
 import simstation.MobileAgent;
 import simstation.Heading;
-
 
 
 public class Plague extends MobileAgent {
@@ -12,15 +12,18 @@ public class Plague extends MobileAgent {
     private int infectionTime = 0;
     private boolean fatal = true;
 
+
     public Plague() {
         super("Plague");
         infected = false;
         dead = false;
     }
 
+
     public boolean isDead() {
         return dead;
     }
+
 
     public void setInfected(boolean status) {
         infected = status;
@@ -29,17 +32,21 @@ public class Plague extends MobileAgent {
         }
     }
 
+
     public boolean isInfected() {
         return infected;
     }
+
 
     public void setFatal(boolean fatal) {
         this.fatal = fatal;
     }
 
+
     public boolean isFatal() {
         return fatal;
     }
+
     public void infect() {
         // Check if infection happens based on virulence
         if (Math.random() * 100 < PlagueSimulation.VIRULENCE) {
@@ -51,17 +58,20 @@ public class Plague extends MobileAgent {
         }
     }
 
+
     @Override
     public void update() throws InterruptedException {
         if (dead || isStopped()) {
             return;
         }
 
+
         // Infection and movement logic
         if (Math.random() < 0.1) {
             turn(Heading.random());
         }
         move(5);
+
 
         if (infected) {
             infectionTime++;
@@ -73,6 +83,7 @@ public class Plague extends MobileAgent {
                     infected = false;
                 }
             }
+
 
             // Attempt to infect neighbors
             Agent neighbor = world.getNeighbor(this, 10);
