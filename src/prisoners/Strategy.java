@@ -1,6 +1,8 @@
 package prisoners;
 
-public interface Strategy {
+import java.io.Serializable;
+
+public interface Strategy extends Serializable {
     boolean cooperate();
     void setCheated(boolean cheated);
 }
