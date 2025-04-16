@@ -3,8 +3,8 @@ package simstation;
 import java.io.Serializable;
 
 public class Agent implements Runnable, Serializable {
-    int xc;
-    int yc;
+    public int xc;
+    public int yc;
     boolean paused = false;
     boolean stopped = false;
     String agentName;
