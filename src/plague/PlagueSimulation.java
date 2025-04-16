@@ -13,7 +13,7 @@ public class PlagueSimulation extends World {
     public static int VIRULENCE = 50;       // % chance to infect on contact
     public static int RESISTANCE = 2;       // % chance to resist infection
 
-    private boolean fatal = true;          // Whether the infection is fatal
+    private boolean fatal = true;// Whether the infection is fatal
 
     public PlagueSimulation() {
         super();

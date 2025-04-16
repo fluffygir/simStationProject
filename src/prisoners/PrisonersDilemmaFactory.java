@@ -1,33 +1,32 @@
-package plague;
+package prisoners;
 
-import mvc.*;
-import simstation.WorldFactory;
+import simstation.*;
+import mvc.Model;
+import mvc.View;
 
+public class PrisonersDilemmaFactory extends WorldFactory {
 
-public class PlagueFactory extends WorldFactory {
     @Override
     public Model makeModel() {
-        return new PlagueSimulation();
-    }
-
-    @Override
-    public View makeView(Model model) {
-        return new PlagueView(model);
+        return new PrisonersDilemmaSimulation();
     }
 
     @Override
     public String getTitle() {
-        return "Plague";
+        return "Prisoner's Dilemma";
     }
 
     @Override
     public String[] getHelp() {
         return new String[]{"Start - Start the simulation","Stop - Stop the simulation", "Resume - Resume the simulation", "Pause - Pause the simulation", "Stats - Display statistics", "Use sliders to adjust simulation parameters"};
-
     }
-
     @Override
     public String about() {
-        return "Plague Simulation - A simulation of disease spread through a population." + "\n" + super.about();
+        return "Prisoner's Dilemma Simulation - A simulation of the Prisoner's Dilemma." + "\n" + super.about();
     }
+    @Override
+    public View makeView(Model m) {
+        return new PrisonersDilemmaView(m);
+    }
+
 }
