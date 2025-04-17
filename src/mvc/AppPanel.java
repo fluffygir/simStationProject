@@ -80,6 +80,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         return result;
     }
 
+
     public void actionPerformed(ActionEvent ae) {
         try {
             String cmmd = ae.getActionCommand();
