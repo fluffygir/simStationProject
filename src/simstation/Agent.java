@@ -5,8 +5,8 @@ import mvc.Utilities;
 import java.io.Serializable;
 
 abstract public class Agent implements Runnable, Serializable {
-    int xc;
-    int yc;
+    public int xc;
+    public int yc;
     boolean paused, stopped;
     String agentName;
     transient protected Thread myThread;
@@ -67,7 +67,7 @@ abstract public class Agent implements Runnable, Serializable {
             try {
                 update();
                 onInterrupted();
-                Thread.sleep(1000);
+                Thread.sleep(100); //not sure what sleep timer to put here
                 checkPaused();
             } catch(InterruptedException e) {
                 System.out.println(e.getMessage());
