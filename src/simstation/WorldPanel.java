@@ -3,7 +3,6 @@ package simstation;
 import mvc.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.*;
 
 public class WorldPanel extends AppPanel {
@@ -60,7 +59,6 @@ public class WorldPanel extends AppPanel {
         controlPanel.add(p,  BorderLayout.NORTH);
     }
 
-
     public void setModel(Model m) {
         super.setModel(m);
         World w = (World)m;
@@ -69,31 +67,7 @@ public class WorldPanel extends AppPanel {
             Thread t = new Thread(it.next());
             t.start();
         }
-        w.observer.myThread = new Thread(w.observer);
-        w.observer.myThread.start(); //have to start the observer agent on file load
     }
 
-    @Override //overrides save commands to require the simulation be stopped
-    public void actionPerformed(ActionEvent ae) {
-        try {
-            String cmmd = ae.getActionCommand();
-            World w = (World)model;
-            if (cmmd.equals("Save")) {
-                if(!w.observer.isStopped()){
-                    throw new RuntimeException("Must stop simulation before saving");
-                }
-                Utilities.save(model, false);
-            } else if (cmmd.equals("SaveAs")) {
-                if(!w.observer.isStopped()){
-                    throw new RuntimeException("Must stop simulation before saving");
-                }
-                Utilities.save(model, true);
-            } else {
-                super.actionPerformed(ae);
-            }
-        } catch (Exception e) {
-            handleException(e);
-        }
-    }
 
 }
