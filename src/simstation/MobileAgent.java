@@ -1,7 +1,7 @@
 package simstation;
 
 abstract public class MobileAgent extends Agent {
-    Heading heading;
+    public Heading heading;
 
     public MobileAgent(String name) {
         super(name);
