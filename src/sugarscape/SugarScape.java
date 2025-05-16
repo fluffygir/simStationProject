@@ -37,6 +37,7 @@ public class SugarScape extends World {
         }
     }
 
+
     public static void main(String[] args) {
         AppPanel panel = new WorldPanel(new SugarScapeFactory());
         panel.display();
